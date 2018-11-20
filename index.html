@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<title>八号小组作品</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style>
+body {font-family: "Times New Roman", Georgia, Serif;}
+h1,h2,h3,h4,h5,h6 {
+    font-family: "Playfair Display";
+    letter-spacing: 5px;
+}
+
+.qiu-col-float-none{
+  width: 455px;
+}
+
+.qiu-row-width-fix{
+  width: 455px;
+  margin:auto;
+}
+
+@media (min-width: 936px){
+  .qiu-col-m6{
+    float:left;
+    margin:none;
+  }
+  .qiu-row-m6{
+    width:910px;
+  }
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 90%;
+    height: 15px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    margin-top: 4px;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.clickText{
+    color: #1123FF;
+}
+
+.clickText:hover{
+    cursor: pointer;
+}
+
+.addSemester{
+  font-size: 70px;
+  transition: .2s;
+}
+
+.addSemester:hover{
+  font-size: 90px;
+  cursor: pointer;
+
+}
+
+</style>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+    <a href="#wc" class="w3-bar-item w3-button">干死598</a>
+    <!-- Right-sided navbar links. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="#wc" class="w3-bar-item w3-button">Workload Cal</a>
+      <a href="#mao" class="w3-bar-item w3-button">Mao's</a>
+      <a href="#undef" class="w3-bar-item w3-button">Undef</a>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:1100px">
+
+  <!-- Workload Calculator -->
+  <div class="w3-row w3-padding-64" id="wc">
+    <div class="w3-padding-large" id="plannedSemesterSpace">
+      <h1 class="w3-center">Workload Calculator</h1><br>
+      <p class="w3-center">Taken Semester(s):</p>
+
+      <!-- Taken Semesters -->
+
+      <!-- First Sub Row of Taken Semesters -->
+      <div class="w3-row qiu-row-width-fix qiu-row-m6" id="semesterCardHolder">
+
+        <!-- First Semester Card -->
+        <div class="w3-center qiu-col-float-none qiu-col-m6"
+          id="semesterCard">
+          <div class="w3-container w3-card w3-white w3-margin"
+            style="border-radius:12px;">
+
+            <!-- Semester Title Row -->
+            <div class="w3-row">
+              <div class="w3-col s4 l4 m4">
+                <p>
+                  &nbsp;
+                </p>
+              </div>
+              <div class="w3-col s4 l4 m4">
+                <p id="semesterTitle">
+                  Semester 1
+                </p>
+              </div>
+              <div class="w3-col s4 l4 m4">
+                <p style="float:right; margin-right:15px" class="clickText">
+                  <a onclick="deleteCard(this)"
+                    style="text-decoration: none;">
+                    &#8213;
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            <!-- Taken Course Row -->
+            <div class="w3-row" id="courseSlap">
+
+              <div class="w3-row" style="width:90%; float:left">
+                <div class="w3-col s6 m6 l6">
+                  <p>
+                    <input class="w3-border" style="width: 80%" type="text">
+                  </p>
+                </div>
+
+                <div class="w3-col s6 m6 l6">
+                  <p>
+                    <input class="w3-border" style="width: 80%" type="text">
+                  </p>
+                </div>
+              </div>
+
+              <div style="width:10%; float:left">
+                <div>
+                  <p style="float:right; margin-right:15px;"
+                    class="clickText" onclick="removeCourseSlap(this)">
+                    &#88;
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Add Course Row -->
+            <div class="w3-row" id="addCourseRow">
+              <div class="w3-row">
+                <p class="clickText" onclick="appendSlap(this)"> Add Course </p>
+              </div>
+            </div>
+
+            <!-- Empty String Row(s) -->
+            <div class="w3-row" id="spaceSlap">
+              <div class="w3-row">
+                <p> &nbsp; </p>
+              </div>
+            </div>
+
+            <div class="w3-row" id="spaceSlap">
+              <div class="w3-row">
+                <p> &nbsp; </p>
+              </div>
+            </div>
+
+            <!-- Workload Indication Row -->
+            <div class="w3-row" id="workloadIndicator" style="width:90%; margin:auto">
+
+              <div class="w3-row" style="width:20%; float:left">
+                <p>
+                  Workload:
+                </p>
+              </div>
+
+              <div class="w3-row" style="width:75%; float:left">
+                <p style="height:15px">
+                  <input type="range" min="1" max="10" value="5"
+                    class="slider" id="workloadSlider"
+                    onchange="showSliderVal(this)">
+                </p>
+              </div>
+
+              <div class="w3-row" style="width:5%; float:left">
+                <p id="sliderValDisp">
+                  5
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Add Sign -->
+        <div class="w3-center qiu-col-float-none qiu-col-m6 addSemester"
+          id="addSign" onclick="addSemesterCard()">
+          <div class="w3-container w3-card w3-white w3-margin"
+            style="border-radius:12px; min-height: 328px">
+            <div style="margin-top:90px">
+              <p> + </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+<!--    <p class="w3-center">Planned Semester:</p> -->
+
+<!--    <p id="workloadDisp" style="visibility:hidde"></p> -->
+  </div>
+
+  <hr>
+
+  <!-- mao Section -->
+  <div class="w3-row w3-padding-64" id="mao">
+
+    <div class="w3-padding-large">
+      <h1 class="w3-center">Mao's</h1>
+      <p class="w3-center">Input your planned courses here:</p>
+      <form class="w3-center" target="_blank" onsubmit="renderSuggest(event)">
+        <p><input class="w3-input w3-padding-16" style="max-width:'50%'" type="text" placeholder="List Courses (sperated by ',')" required name="courses" id="maoInput"></p>
+        <p><button class="w3-button w3-light-grey w3-section" id="sendMsgBtn">SEND MESSAGE</button></p>
+      </form>
+      <p id="suggestDisp" style="visibility:hidde"></p>
+      </div>
+  </div>
+
+  <hr>
+
+  <!-- Undef Section -->
+  <div class="w3-row w3-padding-64" id="undef">
+    <div class="w3-padding-large">
+      <h1 class="w3-center">Undef</h1><br>
+      <h4>Bread Basket</h4>
+      <p class="w3-text-grey">Assortment of fresh baked fruit breads and muffins 5.50</p><br>
+
+      <h4>Honey Almond Granola with Fruits</h4>
+      <p class="w3-text-grey">Natural cereal of honey toasted oats, raisins, almonds and dates 7.00</p><br>
+
+      <h4>Belgian Waffle</h4>
+      <p class="w3-text-grey">Vanilla flavored batter with malted flour 7.50</p><br>
+
+      <h4>Scrambled eggs</h4>
+      <p class="w3-text-grey">Scrambled eggs, roasted red pepper and garlic, with green onions 7.50</p><br>
+
+      <h4>Blueberry Pancakes</h4>
+      <p class="w3-text-grey">With syrup, butter and lots of berries 8.50</p>
+    </div>
+  </div>
+
+  <hr>
+
+
+<!-- End page content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-center w3-light-grey w3-padding-32">
+  <p>Powered by <a title="W3.CSS" target="_blank" class="w3-hover-text-green">Group 8</a></p>
+</footer>
+
+<!-- imported js script -->
+<script type="text/javascript" src="./divLocatorHelper.js"></script>
+<script type="text/javascript" src="./initStyle.js"></script>
+
+<script>
+
+//old codes
+var coursesListInputElement = document.getElementById('coursesListInput');
+var workloadDisp = document.getElementById('workloadDisp');
+
+function renderWorkload(e){
+  e.preventDefault();
+  let coursesListInputText = coursesListInputElement.value;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      workloadDisp.style.visibility = 'visible';
+      workloadDisp.textContent = "workload: " + this.responseText;
+    }
+  };
+  xhttp.open('GET','http://localhost:8081'+'/wc/'+coursesListInputText);
+  xhttp.send();
+}
+
+var maoInputElement = document.getElementById('maoInput');
+var suggestDisp = document.getElementById('suggestDisp');
+
+function renderSuggest(e){
+  e.preventDefault();
+  let maoInputText = maoInputElement.value;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      suggestDisp.style.visibility = 'visible';
+      suggestDisp.textContent = "suggest: " + this.responseText;
+    }
+  };
+  xhttp.open('GET','http://localhost:8081'+'/mao/'+maoInputText);
+  xhttp.send();
+}
+
+//new codes
+//for sliders
+//locate the <p>tag next to it, and changed the displayed workload value
+function showSliderVal(ele){
+  let cardOfEle = locateParentId(ele, "semesterCard");
+  let sliderDispEle = scanForId(cardOfEle, "sliderValDisp");
+  sliderDispEle.textContent = `${ele.value}`;
+}
+
+//for adding course cards/slapes/spaces
+var cardCopy = (document.getElementById("semesterCard")).cloneNode(true);
+var slapCopy = scanForId(cardCopy, "courseSlap");
+var spaceCopy = scanForId(cardCopy, "spaceSlap");
+
+//add a course slap on the card, if there are any space rows, remove one of them
+//enable all slap's cha sign if just there was only one course slap
+function appendSlap(ele){
+  let rowOfEle = locateParentId(ele, "addCourseRow");
+  let slapToIns = slapCopy.cloneNode(true);
+  rowOfEle.parentNode.insertBefore(slapToIns, rowOfEle);
+
+  if(rowOfEle.nextElementSibling.id === "spaceSlap"){
+    rowOfEle.nextElementSibling.remove();
+  }
+}
+
+//add space slaps if must
+//disable cha if must
+function removeCourseSlap(ele){
+  let rowOfEle = locateParentId(ele, "courseSlap");
+  let cardOfEle = locateParentId(ele, "semesterCard");
+  let allSlap = scanForIdAll(cardOfEle, "courseSlap");
+  let addCourseRow = scanForId(cardOfEle, "addCourseRow");
+  //add space slaps if must
+  if(allSlap.length < 4){
+    let spaceToIns = spaceCopy.cloneNode(true);
+    addCourseRow.parentNode.insertBefore(spaceToIns, addCourseRow.nextElementSibling);
+  }
+  rowOfEle.remove();
+}
+
+//for adding semesterCard
+var numCard = 1;
+var plannedSemesterSpace = document.getElementById("plannedSemesterSpace");
+var addSign = document.getElementById("addSign");
+
+function addSemesterCard(){
+  //note down last row before addition
+  let lastBeforeAdd = locateParentId(addSign, "semesterCardHolder");
+  //clone the copy of semesterCard
+  let cardToIns = cardCopy.cloneNode(true);
+  //change title
+  scanForId(cardToIns, "semesterTitle").textContent = `Semester ${numCard+1}`;
+
+  if(numCard%2 == 1){
+  //if numCard is odd
+    //create a new row
+    let rowToIns = document.createElement("div");
+    rowToIns.classList.add("w3-row"); rowToIns.classList.add("qiu-row-width-fix"); rowToIns.classList.add("qiu-row-m6");
+    rowToIns.id = "semesterCardHolder";
+    //insert the new row
+    plannedSemesterSpace.appendChild(rowToIns);
+    //moveAddSign to it
+    rowToIns.appendChild(addSign);
+    //put cloned card at the end of the noted row
+    lastBeforeAdd.appendChild(cardToIns);
+  }else{
+  //if numCard is even
+    //put cloned card before addSigns
+    lastBeforeAdd.insertBefore(cardToIns, addSign);
+  }
+
+
+  //at last numCard++
+  numCard = numCard + 1;
+}
+
+function deleteCard_helper(eleHolder){
+  //eleHolder is Empty (must be last row)
+  if(eleHolder.childNodes.length === 0){
+    eleHolder.remove();
+    return;
+  }
+
+  //eleHolder has one child left
+  //case 1: last row, job finish, return
+  if(!eleHolder.nextElementSibling) return;
+  //case 2: not last row,
+  let cardToMove = eleHolder.nextElementSibling.childNodes[0];
+  eleHolder.appendChild(cardToMove);
+  deleteCard_helper(eleHolder.nextElementSibling);
+
+}
+
+function deleteCard(ele){
+  //find the card containing ele
+  let eleCard = locateParentId(ele, "semesterCard");
+  //find the card holder containing that card
+  let eleCardHolder = locateParentId(eleCard, "semesterCardHolder");
+  //remove the card
+  eleCard.remove();
+  //holder taking card from below
+  deleteCard_helper(eleCardHolder);
+  //numCard--
+  numCard = numCard - 1;
+  //reassign semester titles
+  let cardList = scanForIdAll(plannedSemesterSpace, "semesterCard");
+  for(let i = 0; i < cardList.length; i++){
+    let tempTitle = scanForId(cardList[i], "semesterTitle");
+    // let semIdx = (tempTitle.textContent.match(/\d+/))[0];
+    tempTitle.textContent = `Semester ${i+1}`
+  }
+}
+
+</script>
+
+</body>
+</html>
